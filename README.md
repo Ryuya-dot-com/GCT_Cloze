@@ -3,8 +3,8 @@
 Static GitHub Pages survey for independent cloze norming of the GCT
 meaning-derivation contexts.
 
-Public survey files are in `docs/`.
+The survey is available from the repository root for GitHub Pages. The same
+files are also mirrored in `docs/` so either Pages source setting works.
 
-Before data collection, set the submission address in `docs/config.js`, then
-publish this repository with GitHub Pages using the `main` branch and `/docs`
-as the source.
+Before data collection, set the submission address in `config.js` and
+`docs/config.js`.
