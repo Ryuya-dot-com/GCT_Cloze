@@ -40,8 +40,8 @@ The participant flow is:
 2. Complete one practice item.
 3. Complete the survey items by listing possible English completions and
    possible Japanese meanings.
-4. Download the CSV automatically.
-5. Attach the CSV to the prepared email and submit it.
+4. Download the result CSV automatically.
+5. Submit the downloaded result by email.
 
 Browsers cannot attach the CSV file to an email automatically, so participants
 must attach the downloaded file manually.

@@ -272,7 +272,7 @@
   async function finishSurvey() {
     state.completedAt = new Date().toISOString();
     showView("done");
-    submitStatus.textContent = "回答データをCSVとして保存しています。";
+    submitStatus.textContent = "回答データを結果CSVとしてダウンロードしています。";
     saveDraft();
 
     if (config.autoDownloadCsv) {
@@ -428,16 +428,16 @@
   function updateCompletionMessage() {
     const filename = state.downloadedFilename || buildCsvFilename();
     submitStatus.innerHTML = config.autoDownloadCsv
-      ? `CSVファイル <code>${escapeHtml(filename)}</code> を保存しました。`
-      : `CSVファイル <code>${escapeHtml(filename)}</code> を保存してください。`;
+      ? `結果CSVファイル <code>${escapeHtml(filename)}</code> をダウンロードしました。`
+      : `結果CSVファイル <code>${escapeHtml(filename)}</code> をダウンロードしてください。`;
 
     if (config.submissionEmail) {
       emailInstruction.innerHTML =
-        `保存されたCSVファイルを <strong>${escapeHtml(config.submissionEmail)}</strong> 宛のメールに添付して提出してください。`;
+        `ダウンロードした結果CSVファイルを <strong>${escapeHtml(config.submissionEmail)}</strong> 宛のメールに添付して提出してください。`;
       emailButton.classList.remove("is-hidden");
       emailButton.href = buildMailtoLink();
     } else {
-      emailInstruction.textContent = "保存されたCSVファイルを指定された提出先メールアドレスへ添付して提出してください。";
+      emailInstruction.textContent = "ダウンロードした結果をメールで提出してください。";
       emailButton.classList.add("is-hidden");
     }
   }
@@ -446,14 +446,14 @@
     const filename = state.downloadedFilename || buildCsvFilename();
     const subject = config.emailSubject || "GCT Cloze Survey CSV Submission";
     const body = [
-      "回答CSVを添付して提出します。",
+      "ダウンロードした結果CSVを添付して提出します。",
       "",
       `Study ID: ${config.studyId}`,
       `Participant ID: ${state.participant.participantId || ""}`,
       `Session ID: ${state.sessionId}`,
       `CSV filename: ${filename}`,
       "",
-      "このメールにCSVファイルを添付して送信してください。"
+      "このメールにダウンロードしたCSVファイルを添付して送信してください。"
     ].join("\n");
     return `mailto:${encodeURIComponent(config.submissionEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
