@@ -1,0 +1,386 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --text: #202421;
+  --muted: #606963;
+  --line: #d8ddd6;
+  --accent: #226b5f;
+  --accent-strong: #164d44;
+  --accent-soft: #d9ebe6;
+  --warning: #a44322;
+  --shadow: 0 18px 48px rgba(27, 42, 34, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+button,
+input,
+select,
+a.primary-action,
+a.secondary-action,
+a.text-action {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.is-active {
+  display: block;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: 40px;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+}
+
+.intro-copy h1,
+.done-panel h2,
+.task-header h2 {
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.intro-copy h1 {
+  max-width: 720px;
+  font-size: clamp(42px, 7vw, 82px);
+}
+
+.intro-copy p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.instruction-list {
+  max-width: 680px;
+  margin: 24px 0 0;
+  padding-left: 22px;
+  color: var(--text);
+}
+
+.instruction-list li {
+  margin: 8px 0;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.panel,
+.response-panel,
+.passage-panel,
+.done-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.panel {
+  padding: 28px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+label,
+.range-label {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus,
+input[type="range"]:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(34, 107, 95, 0.25);
+  outline-offset: 2px;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+textarea:disabled {
+  background: #f1f3ef;
+  color: var(--muted);
+}
+
+.check-row {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin: 8px 0 22px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.check-row input {
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: var(--accent);
+}
+
+.primary-action,
+.secondary-action,
+.text-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 750;
+  text-align: center;
+  text-decoration: none;
+}
+
+.primary-action {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+}
+
+.primary-action:hover {
+  background: var(--accent-strong);
+}
+
+.secondary-action {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.secondary-action:hover {
+  border-color: var(--accent);
+}
+
+.text-action {
+  background: transparent;
+  color: var(--accent);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.task-header h2,
+.done-panel h2 {
+  font-size: 34px;
+}
+
+.progress-block {
+  width: min(300px, 42vw);
+}
+
+#progress-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.progress-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e4e8e1;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 180ms ease;
+}
+
+.task-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  gap: 24px;
+  align-items: start;
+}
+
+.passage-panel {
+  min-height: 360px;
+  padding: 34px;
+}
+
+.passage {
+  font-size: 22px;
+  line-height: 1.85;
+}
+
+.blank {
+  display: inline-flex;
+  min-width: 82px;
+  padding: 0 8px;
+  justify-content: center;
+  font-weight: 700;
+  border-bottom: 3px solid var(--accent);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+.response-panel {
+  padding: 24px;
+  position: sticky;
+  top: 24px;
+}
+
+.range-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.button-row .primary-action,
+.button-row .secondary-action {
+  width: auto;
+  flex: 1;
+}
+
+.done-panel {
+  width: min(680px, 100%);
+  margin: 16vh auto 0;
+  padding: 34px;
+}
+
+.done-panel p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+.done-panel code {
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95em;
+}
+
+.email-instruction {
+  margin-top: 10px;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.error-text {
+  color: var(--warning);
+}
+
+@media (max-width: 820px) {
+  .app-shell {
+    width: min(100% - 24px, 720px);
+    padding: 24px 0;
+  }
+
+  .intro-grid,
+  .task-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-grid {
+    min-height: auto;
+    gap: 28px;
+  }
+
+  .intro-copy h1 {
+    font-size: 46px;
+  }
+
+  .task-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .progress-block {
+    width: 100%;
+  }
+
+  #progress-label {
+    text-align: left;
+  }
+
+  .passage-panel {
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .passage {
+    font-size: 18px;
+  }
+
+  .response-panel {
+    position: static;
+  }
+}

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GCT Cloze Survey</title>
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="intro-view" class="screen is-active" aria-labelledby="intro-title">
+        <div class="intro-grid">
+          <div class="intro-copy">
+            <p class="eyebrow">Guessing from Context Test</p>
+            <h1 id="intro-title">Context Reading Survey</h1>
+            <p>
+              文脈から空欄に入る語や意味を推測する調査です。各英文を読み、空欄に合いそうな英語と日本語の意味を入力してください。
+            </p>
+            <ul class="instruction-list">
+              <li>最初に練習を1問行い、その後に本番20問へ進みます。</li>
+              <li>辞書、翻訳ツール、検索は使わず、文脈だけから判断してください。</li>
+              <li>英語と日本語は、思いつくものをできるだけ複数書いてください。XXXXに語尾が付いている場合は、その形も手がかりにしてください。</li>
+              <li>思いつかない場合は「文脈だけでは判断できない」を選んでください。</li>
+              <li>完了時にCSVファイルが自動保存されます。保存されたCSVをメールに添付して提出してください。</li>
+            </ul>
+          </div>
+
+          <form id="participant-form" class="panel" autocomplete="off">
+            <div class="field">
+              <label for="participant-id">参加者ID</label>
+              <input id="participant-id" name="participantId" type="text" placeholder="例: A001">
+            </div>
+
+            <div class="field">
+              <label for="group-code">クラス・調査コード</label>
+              <input id="group-code" name="groupCode" type="text" placeholder="任意">
+            </div>
+
+            <div class="field">
+              <label for="english-level">英語熟達度の自己評価</label>
+              <select id="english-level" name="englishLevel">
+                <option value="">選択してください</option>
+                <option value="beginner">初級</option>
+                <option value="lower_intermediate">初中級</option>
+                <option value="intermediate">中級</option>
+                <option value="upper_intermediate">中上級</option>
+                <option value="advanced">上級</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="eiken-level">英検の取得級</label>
+              <select id="eiken-level" name="eikenLevel">
+                <option value="">選択してください</option>
+                <option value="none">取得なし</option>
+                <option value="grade_5">5級</option>
+                <option value="grade_4">4級</option>
+                <option value="grade_3">3級</option>
+                <option value="pre_2">準2級</option>
+                <option value="grade_2">2級</option>
+                <option value="pre_1">準1級</option>
+                <option value="grade_1">1級</option>
+                <option value="not_sure">わからない</option>
+                <option value="prefer_not_to_answer">回答しない</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="other-qualification">その他の英語資格・スコア</label>
+              <input id="other-qualification" name="otherQualification" type="text" placeholder="例: TOEIC 650、IELTS 5.5 など。任意">
+            </div>
+
+            <label class="check-row">
+              <input id="consent" name="consent" type="checkbox" required>
+              <span>調査の目的を理解し、匿名化された回答が研究目的で利用されることに同意します。</span>
+            </label>
+
+            <button class="primary-action" type="submit">練習を開始</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="task-view" class="screen" aria-labelledby="task-title">
+        <header class="task-header">
+          <div>
+            <p class="eyebrow">Cloze task</p>
+            <h2 id="task-title">空欄補充</h2>
+          </div>
+          <div class="progress-block" aria-live="polite">
+            <span id="progress-label">0 / 0</span>
+            <div class="progress-track" aria-hidden="true">
+              <div id="progress-bar" class="progress-bar"></div>
+            </div>
+          </div>
+        </header>
+
+        <article class="task-layout">
+          <section class="passage-panel" aria-label="英文パッセージ">
+            <div id="passage" class="passage"></div>
+          </section>
+
+          <form id="response-form" class="response-panel">
+            <div class="field">
+              <label for="answer-english">Q1. XXXXで示された箇所に当てはまる英語をできるだけたくさん書いてください</label>
+              <textarea id="answer-english" name="answerEnglish" rows="4" spellcheck="false" autocomplete="off" placeholder="語形も含めて、1行に1つ、またはカンマで区切って入力"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="answer-japanese">Q2. XXXXで示された箇所に当てはまる日本語の意味をできるだけたくさん書いてください</label>
+              <textarea id="answer-japanese" name="answerJapanese" rows="4" autocomplete="off" placeholder="1行に1つ、または読点・カンマで区切って入力"></textarea>
+            </div>
+
+            <label class="check-row">
+              <input id="unknown" name="unknown" type="checkbox">
+              <span>文脈だけでは判断できない</span>
+            </label>
+
+            <div class="field">
+              <div class="range-label">
+                <label for="confidence">確信度</label>
+                <output id="confidence-output" for="confidence">50</output>
+              </div>
+              <input id="confidence" name="confidence" type="range" min="0" max="100" step="1" value="50">
+            </div>
+
+            <div class="button-row">
+              <button id="back-button" class="secondary-action" type="button">戻る</button>
+              <button id="next-button" class="primary-action" type="submit">次へ</button>
+            </div>
+          </form>
+        </article>
+      </section>
+
+      <section id="done-view" class="screen" aria-labelledby="done-title">
+        <div class="done-panel">
+          <p class="eyebrow">Completed</p>
+          <h2 id="done-title">回答が完了しました</h2>
+          <p id="submit-status">回答データを準備しています。</p>
+          <p id="email-instruction" class="email-instruction">
+            自動保存されたCSVファイルをメールに添付して提出してください。
+          </p>
+          <div class="button-row">
+            <a id="email-button" class="primary-action" href="#">提出メールを作成</a>
+            <button id="download-button" class="secondary-action" type="button">CSVを再保存</button>
+            <button id="restart-button" class="text-action" type="button">最初からやり直す</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
