@@ -8,6 +8,9 @@
   --accent: #226b5f;
   --accent-strong: #164d44;
   --accent-soft: #d9ebe6;
+  --skill: #8a5a18;
+  --skill-soft: #fff4dc;
+  --skill-line: #e8d5ae;
   --warning: #a44322;
   --shadow: 0 18px 48px rgba(27, 42, 34, 0.12);
 }
@@ -52,7 +55,7 @@ a.text-action {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
   gap: 40px;
-  align-items: center;
+  align-items: start;
   min-height: calc(100vh - 80px);
 }
 
@@ -66,7 +69,7 @@ a.text-action {
 
 .intro-copy h1 {
   max-width: 720px;
-  font-size: clamp(42px, 7vw, 82px);
+  font-size: clamp(38px, 5vw, 60px);
 }
 
 .intro-copy p:not(.eyebrow) {
@@ -74,6 +77,81 @@ a.text-action {
   margin: 24px 0 0;
   color: var(--muted);
   font-size: 18px;
+}
+
+.strategy-panel {
+  max-width: 720px;
+  margin: 28px 0 0;
+  padding: 20px 22px;
+  border: 1px solid var(--skill-line);
+  border-left: 5px solid var(--skill);
+  border-radius: 8px;
+  background: var(--skill-soft);
+}
+
+.strategy-panel .eyebrow {
+  margin-bottom: 8px;
+  color: var(--skill);
+}
+
+.strategy-panel h2 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.strategy-list {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: strategy;
+}
+
+.strategy-list li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 2px 12px;
+  align-items: start;
+  counter-increment: strategy;
+}
+
+.strategy-list li::before {
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--skill);
+  color: #fff;
+  content: counter(strategy);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.strategy-list strong,
+.strategy-list span {
+  grid-column: 2;
+}
+
+.strategy-list strong {
+  line-height: 1.35;
+}
+
+.strategy-list span {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.intro-copy .strategy-note {
+  max-width: none;
+  margin: 16px 0 0;
+  color: #5f4a24;
+  font-size: 15px;
 }
 
 .instruction-list {
@@ -108,6 +186,43 @@ a.text-action {
 
 .panel {
   padding: 28px;
+}
+
+.draft-banner {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding: 16px;
+  border: 1px solid var(--skill-line);
+  border-radius: 8px;
+  background: var(--skill-soft);
+}
+
+.draft-banner p {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+}
+
+.draft-banner strong {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.draft-banner span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.draft-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.draft-actions .secondary-action,
+.draft-actions .text-action {
+  flex: 1 1 150px;
 }
 
 .field {
@@ -298,8 +413,17 @@ input[type="range"] {
   accent-color: var(--accent);
 }
 
+.scale-help {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .button-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   align-items: center;
 }
@@ -308,6 +432,10 @@ input[type="range"] {
 .button-row .secondary-action {
   width: auto;
   flex: 1;
+}
+
+.button-row .text-action {
+  flex: 1 1 100%;
 }
 
 .done-panel {
@@ -356,6 +484,23 @@ input[type="range"] {
 
   .intro-copy h1 {
     font-size: 46px;
+  }
+
+  .strategy-panel {
+    padding: 16px;
+  }
+
+  .strategy-panel h2 {
+    font-size: 19px;
+  }
+
+  .strategy-list {
+    gap: 10px;
+  }
+
+  .strategy-list span,
+  .intro-copy .strategy-note {
+    font-size: 14px;
   }
 
   .task-header {

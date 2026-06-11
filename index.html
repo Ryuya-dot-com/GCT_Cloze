@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GCT Cloze Survey</title>
+    <title>GCT 未知語推測トレーニング</title>
     <link rel="stylesheet" href="assets/styles.css">
   </head>
   <body>
@@ -12,32 +12,67 @@
         <div class="intro-grid">
           <div class="intro-copy">
             <p class="eyebrow">Guessing from Context Test</p>
-            <h1 id="intro-title">Context Reading Survey</h1>
+            <h1 id="intro-title">未知語推測トレーニング</h1>
+
+            <section class="strategy-panel" aria-labelledby="strategy-title">
+              <p class="eyebrow">未知語推測のコツ</p>
+              <h2 id="strategy-title">知らない語でも、手がかりは本文の中にあります</h2>
+              <ol class="strategy-list">
+                <li>
+                  <strong>場面をつかむ</strong>
+                  <span>前後の文から、人物・行動・理由や結果を押さえます。</span>
+                </li>
+                <li>
+                  <strong>品詞と語形を見る</strong>
+                  <span>XXXXed や XXXXly のような形、直前直後の語から品詞を考えます。</span>
+                </li>
+                <li>
+                  <strong>近い意味を複数出す</strong>
+                  <span>一つに絞れなくても大丈夫です。本文に合いそうな候補を広げます。</span>
+                </li>
+              </ol>
+              <p class="strategy-note">
+                この課題で大切なのは、知っている単語の数だけではなく、限られた手がかりから筋の通った推測をする力です。
+              </p>
+            </section>
+
             <p>
-              文脈から空欄に入る語や意味を推測する調査です。各英文を読み、空欄に合いそうな英語と日本語の意味を入力してください。
+              英文の前後関係から、空欄に入りそうな英語と日本語の意味を考える学習活動です。未知語に出会ったときに、文脈・語形・品詞の手がかりから意味を絞り込む練習をします。
             </p>
             <ul class="instruction-list">
-              <li>最初に練習を1問行い、その後に本番20問へ進みます。</li>
+              <li>最初にいくつかの練習問題を行い、その後に本番20問へ進みます。</li>
               <li>辞書、翻訳ツール、検索は使わず、文脈だけから判断してください。</li>
-              <li>英語と日本語は、思いつくものをできるだけ複数書いてください。XXXXに語尾が付いている場合は、その形も手がかりにしてください。</li>
-              <li>思いつかない場合は「文脈だけでは判断できない」を選んでください。</li>
-              <li>完了時に結果CSVファイルが自動でダウンロードされます。ダウンロードした結果をメールで提出してください。</li>
+              <li>英語と日本語は、思いつく候補を複数書いてください。XXXXに語尾が付いている場合は、その形も手がかりにしてください。</li>
+              <li>候補が一つに決まらなくても大丈夫です。本文に合いそうな順に入力してください。</li>
+              <li>どうしても思いつかない場合は「手がかりだけでは判断できない」を選んでください。</li>
+              <li>完了時に回答Excelファイルが自動でダウンロードされます。実施者から指示がある場合は、そのファイルを提出してください。</li>
             </ul>
           </div>
 
           <form id="participant-form" class="panel" autocomplete="off">
+            <div id="draft-banner" class="draft-banner is-hidden" role="status" aria-live="polite">
+              <p>
+                <strong>途中の回答があります</strong>
+                <span>同じ受験者の場合は続きから再開できます。共有端末で別の受験者が使う場合は、新しく開始してください。</span>
+              </p>
+              <div class="draft-actions">
+                <button id="resume-draft-button" class="secondary-action" type="button">続きから再開</button>
+                <button id="clear-draft-button" class="text-action" type="button">新しく開始</button>
+              </div>
+            </div>
+
             <div class="field">
-              <label for="participant-id">参加者ID</label>
+              <label for="participant-id">受験者ID</label>
               <input id="participant-id" name="participantId" type="text" placeholder="例: A001">
             </div>
 
             <div class="field">
-              <label for="group-code">クラス・調査コード</label>
+              <label for="group-code">クラス・実施コード</label>
               <input id="group-code" name="groupCode" type="text" placeholder="任意">
             </div>
 
             <div class="field">
-              <label for="english-level">英語熟達度の自己評価</label>
+              <label for="english-level">現在の英語レベル</label>
               <select id="english-level" name="englishLevel">
                 <option value="">選択してください</option>
                 <option value="beginner">初級</option>
@@ -72,10 +107,10 @@
 
             <label class="check-row">
               <input id="consent" name="consent" type="checkbox" required>
-              <span>調査の目的を理解し、匿名化された回答が研究目的で利用されることに同意します。</span>
+              <span>この活動の目的を理解し、回答が事前に説明された範囲で授業運営・学習状況の把握・研究目的に利用されることに同意します。</span>
             </label>
 
-            <button class="primary-action" type="submit">練習を開始</button>
+            <button class="primary-action" type="submit">練習を始める</button>
           </form>
         </div>
       </section>
@@ -83,8 +118,8 @@
       <section id="task-view" class="screen" aria-labelledby="task-title">
         <header class="task-header">
           <div>
-            <p class="eyebrow">Cloze task</p>
-            <h2 id="task-title">空欄補充</h2>
+            <p class="eyebrow">Context clue practice</p>
+            <h2 id="task-title">文脈から推測</h2>
           </div>
           <div class="progress-block" aria-live="polite">
             <span id="progress-label">0 / 0</span>
@@ -101,18 +136,18 @@
 
           <form id="response-form" class="response-panel">
             <div class="field">
-              <label for="answer-english">Q1. XXXXで示された箇所に当てはまる英語をできるだけたくさん書いてください</label>
-              <textarea id="answer-english" name="answerEnglish" rows="4" spellcheck="false" autocomplete="off" placeholder="語形も含めて、1行に1つ、またはカンマで区切って入力"></textarea>
+              <label for="answer-english">Q1. XXXXに入りそうな英語候補</label>
+              <textarea id="answer-english" name="answerEnglish" rows="4" spellcheck="false" autocomplete="off" placeholder="例: 動詞や名詞など。1行に1つ、またはカンマで区切って入力"></textarea>
             </div>
 
             <div class="field">
-              <label for="answer-japanese">Q2. XXXXで示された箇所に当てはまる日本語の意味をできるだけたくさん書いてください</label>
-              <textarea id="answer-japanese" name="answerJapanese" rows="4" autocomplete="off" placeholder="1行に1つ、または読点・カンマで区切って入力"></textarea>
+              <label for="answer-japanese">Q2. その語が表しそうな日本語の意味</label>
+              <textarea id="answer-japanese" name="answerJapanese" rows="4" autocomplete="off" placeholder="例: 近い意味を複数。1行に1つ、または読点・カンマで区切って入力"></textarea>
             </div>
 
             <label class="check-row">
               <input id="unknown" name="unknown" type="checkbox">
-              <span>文脈だけでは判断できない</span>
+              <span>手がかりだけでは判断できない</span>
             </label>
 
             <div class="field">
@@ -120,7 +155,11 @@
                 <label for="confidence">確信度</label>
                 <output id="confidence-output" for="confidence">50</output>
               </div>
-              <input id="confidence" name="confidence" type="range" min="0" max="100" step="1" value="50">
+              <input id="confidence" name="confidence" type="range" min="0" max="100" step="1" value="50" aria-describedby="confidence-help">
+              <div id="confidence-help" class="scale-help">
+                <span>0: まったく自信がない</span>
+                <span>100: とても自信がある</span>
+              </div>
             </div>
 
             <div class="button-row">
@@ -134,15 +173,15 @@
       <section id="done-view" class="screen" aria-labelledby="done-title">
         <div class="done-panel">
           <p class="eyebrow">Completed</p>
-          <h2 id="done-title">回答が完了しました</h2>
+          <h2 id="done-title">学習活動が完了しました</h2>
           <p id="submit-status">回答データを準備しています。</p>
           <p id="email-instruction" class="email-instruction">
-            ダウンロードした結果をメールで提出してください。
+            実施者から指示がある場合は、ダウンロードした回答Excelファイルを提出してください。
           </p>
           <div class="button-row">
             <a id="email-button" class="primary-action" href="#">提出メールを作成</a>
-            <button id="download-button" class="secondary-action" type="button">CSVを再ダウンロード</button>
-            <button id="restart-button" class="text-action" type="button">最初からやり直す</button>
+            <button id="download-button" class="secondary-action" type="button">回答Excelを再ダウンロード</button>
+            <button id="restart-button" class="text-action" type="button">もう一度やり直す</button>
           </div>
         </div>
       </section>
